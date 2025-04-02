@@ -864,6 +864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1306607472}
+  - component: {fileID: 1306607473}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -889,6 +890,22 @@ Transform:
   - {fileID: 817431892}
   m_Father: {fileID: 1686162423}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1306607473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306607471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e951f14982100d5448e938f43da8dae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitudeX: 0.001
+  periodX: 1
+  amplitudeY: 0.001
+  periodY: 1.5
 --- !u!1 &1686162419
 GameObject:
   m_ObjectHideFlags: 0
