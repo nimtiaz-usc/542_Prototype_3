@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 forward = transform.TransformDirection(camPivot.forward);
-        Vector3 right = transform.TransformDirection(camPivot.right);
+        Vector3 forward = camPivot.forward; //transform.TransformDirection(Vector3.forward);
+        Vector3 right = camPivot.right; //transform.TransformDirection(Vector3.right);
 
         float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
