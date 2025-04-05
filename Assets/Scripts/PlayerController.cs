@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     //private Camera cam;
     [SerializeField] float walkSpeed = 6f;
+    [SerializeField] float sprintFactor = 2f;
 
     [SerializeField] float lookSpeed = 2f;
     [SerializeField] float lookXLimit = 45f;
@@ -18,12 +20,13 @@ public class PlayerController : MonoBehaviour
 
     CharacterController characterController;
     [SerializeField] Transform camPivot;
+    [SerializeField] Camera cam;
 
     //[SerializeField] AudioSource footstepSFX;
 
     private void Start()
     {
-        //cam = Camera.main;
+        cam = Camera.main;
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -36,6 +39,17 @@ public class PlayerController : MonoBehaviour
 
         float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
+
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            curSpeedX *= sprintFactor;
+            curSpeedY *= sprintFactor;
+            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 1);
+        } else {
+            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 60f, 1);
+        }
+
+        Debug.Log("curSpeedX: " + curSpeedX);
+        Debug.Log("curSpeedY: " + curSpeedY);
 
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
