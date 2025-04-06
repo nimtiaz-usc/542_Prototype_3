@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     [SerializeField] Transform camPivot;
     [SerializeField] Camera cam;
+
+    [SerializeField] Image speedLines;
 
     //[SerializeField] AudioSource footstepSFX;
 
@@ -44,12 +47,14 @@ public class PlayerController : MonoBehaviour
             curSpeedX *= sprintFactor;
             curSpeedY *= sprintFactor;
             DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 1);
+            speedLines.DOFade(0.35f, 1);
         } else {
             DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 60f, 1);
+            speedLines.DOFade(0f, 1);
         }
 
-        Debug.Log("curSpeedX: " + curSpeedX);
-        Debug.Log("curSpeedY: " + curSpeedY);
+        //Debug.Log("curSpeedX: " + curSpeedX);
+        //Debug.Log("curSpeedY: " + curSpeedY);
 
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
