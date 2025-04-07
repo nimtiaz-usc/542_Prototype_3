@@ -17,7 +17,7 @@ public class HorizontalTurn : MonoBehaviour
 
     void Update()
     {
-        if (player.canMove)
+        if (!player.isAttacking)
         {
             currInput = Input.GetAxis("Horizontal");
 

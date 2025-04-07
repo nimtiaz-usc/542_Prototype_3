@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     float rotationX = 0f;
 
     public bool canMove = true;
+    public bool isAttacking = false;
 
     CharacterController characterController;
     [SerializeField] Transform camPivot;

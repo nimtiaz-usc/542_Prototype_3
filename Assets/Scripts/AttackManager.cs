@@ -10,13 +10,13 @@ public class AttackManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButton(0)) {
             Debug.Log("hi hi");
-            player.canMove = false;
+            player.isAttacking = true;
             transform.DOMove(attackPos[0].position, 0.5f);
         }
-        if (!Input.GetMouseButton(0)) {
-            player.canMove = true;
+        else {
+            player.isAttacking = false;
         }
     }
 }
