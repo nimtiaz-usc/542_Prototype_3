@@ -21,9 +21,9 @@ public class HorizontalTurn : MonoBehaviour
         {
             currInput = Input.GetAxis("Horizontal");
 
-            Debug.Log("prev: " + prevInput);
-            Debug.Log("curr: " + currInput);
-            Debug.Log("-------------------------------------");
+            // Debug.Log("prev: " + prevInput);
+            // Debug.Log("curr: " + currInput);
+            // Debug.Log("-------------------------------------");
 
             if (currInput < 0 && currInput <= prevInput)
             {

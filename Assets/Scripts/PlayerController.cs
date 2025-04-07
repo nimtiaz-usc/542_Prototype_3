@@ -46,14 +46,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") != 0) {
             curSpeedX *= sprintFactor;
             curSpeedY *= sprintFactor;
-            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 1.5f).SetEase(Ease.OutElastic);
+            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 5f).SetEase(Ease.OutElastic);
             speedLines.DOFade(0.35f, 2f).SetEase(Ease.OutElastic);
         } else {
-            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 60f, 1.5f).SetEase(Ease.OutElastic);
+            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 60f, 5f).SetEase(Ease.OutElastic);
             speedLines.DOFade(0f, 2f).SetEase(Ease.OutElastic);
         }
 
-        float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
         if (canMove)

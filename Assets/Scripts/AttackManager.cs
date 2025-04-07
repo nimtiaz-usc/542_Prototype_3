@@ -11,6 +11,7 @@ public class AttackManager : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
+            Debug.Log("hi hi");
             player.canMove = false;
             transform.DOMove(attackPos[0].position, 0.5f);
         }
