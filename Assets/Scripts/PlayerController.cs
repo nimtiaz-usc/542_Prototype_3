@@ -43,26 +43,22 @@ public class PlayerController : MonoBehaviour
         float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
 
-        if (Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") != 0) {
             curSpeedX *= sprintFactor;
             curSpeedY *= sprintFactor;
-            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 1);
-            speedLines.DOFade(0.35f, 1);
+            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 1.5f).SetEase(Ease.OutElastic);
+            speedLines.DOFade(0.35f, 2f).SetEase(Ease.OutElastic);
         } else {
-            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 60f, 1);
-            speedLines.DOFade(0f, 1);
+            DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 60f, 1.5f).SetEase(Ease.OutElastic);
+            speedLines.DOFade(0f, 2f).SetEase(Ease.OutElastic);
         }
-
-        //Debug.Log("curSpeedX: " + curSpeedX);
-        //Debug.Log("curSpeedY: " + curSpeedY);
 
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        characterController.Move(moveDirection * Time.deltaTime);
-
         if (canMove)
         {
+            characterController.Move(moveDirection * Time.deltaTime);
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             camPivot.localRotation = Quaternion.Euler(rotationX, 0, 0);
