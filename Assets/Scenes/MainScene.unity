@@ -1059,13 +1059,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809735717}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.3543112, z: -0, w: 0.93512756}
-  m_LocalPosition: {x: 0.14919534, y: 0, z: 0.12970048}
+  m_LocalRotation: {x: -0.18164493, y: 0.08086368, z: -0.14940113, w: 0.9685792}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1306607472}
-  m_LocalEulerAnglesHint: {x: 0, y: -41.503, z: 0}
+  m_LocalEulerAnglesHint: {x: -19.13, y: 12.9, z: -19.72}
 --- !u!1 &817431891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,13 +1173,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901397386}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.06060492, y: -0.2712324, z: -0.17037904, w: 0.94537354}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1306607472}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.27, y: -32.25, z: -20.8}
 --- !u!1 &1022980533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,14 +1277,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149375947}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d2117d91d6e99346a12407892ac7145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1686162425}
+  attackSpeed: 0.1
+  attackWindup: 4
   attackPos:
   - {fileID: 809735718}
+  - {fileID: 901397387}
 --- !u!1 &1306607471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1591,6 @@ GameObject:
   - component: {fileID: 1686162423}
   - component: {fileID: 1686162422}
   - component: {fileID: 1686162421}
-  - component: {fileID: 1686162420}
   - component: {fileID: 1686162425}
   - component: {fileID: 1686162424}
   m_Layer: 0
@@ -1598,29 +1600,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1686162420
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686162419}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1686162421
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1706,13 +1685,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 0
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.75, z: 0}
 --- !u!114 &1686162425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1730,6 +1709,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 45
   canMove: 1
+  isAttacking: 0
   camPivot: {fileID: 1306607472}
   cam: {fileID: 0}
   speedLines: {fileID: 299893597}

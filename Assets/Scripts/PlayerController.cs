@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
 
     //[SerializeField] AudioSource footstepSFX;
 
+    private float prevInput = 0f;
+    private float currInput = 0f;
+
     private void Start()
     {
         cam = Camera.main;
@@ -38,13 +41,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        currInput = Input.GetAxis("Vertical");
+
         Vector3 forward = camPivot.forward; //transform.TransformDirection(Vector3.forward);
         Vector3 right = camPivot.right; //transform.TransformDirection(Vector3.right);
 
         float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
 
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") != 0) {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") > 0 && currInput >= prevInput) {
             curSpeedX *= sprintFactor;
             curSpeedY *= sprintFactor;
             DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 5f).SetEase(Ease.OutElastic);
@@ -73,6 +78,8 @@ public class PlayerController : MonoBehaviour
             //footstepSFX.enabled = false;
             //footstepSFX.volume = 0;
         }
+
+        prevInput = currInput;
 
     }
 
