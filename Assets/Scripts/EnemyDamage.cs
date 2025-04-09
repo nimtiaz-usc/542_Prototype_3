@@ -7,9 +7,10 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] float health = 10f;
     [SerializeField] bool attackable = true;
     [SerializeField] float invulnerableTime = 1f;
+    [SerializeField] float maxForce = 1f;
     [SerializeField] Material[] defaultMaterials;
     [SerializeField] Material[] attackMaterials;
-
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -22,14 +23,14 @@ public class EnemyDamage : MonoBehaviour
                     health -= player.attackDamage;
                     Debug.Log("attacked: now at " + health + " HP!");
 
-                    MeshRenderer[] parts = GetComponentsInChildren<MeshRenderer>();
-                    foreach(MeshRenderer part in parts) {
-                        part.materials = attackMaterials;
+                    MeshRenderer[] partRenderers = GetComponentsInChildren<MeshRenderer>();
+                    foreach(MeshRenderer partRenderer in partRenderers) {
+                        partRenderer.materials = attackMaterials;
                     }
 
                     if (health <= 0)
                     {
-                        Destroy(gameObject);
+                        KillEnemy();
                     } else
                     {
                         Invoke("ResetAttackable", invulnerableTime);
@@ -47,5 +48,19 @@ public class EnemyDamage : MonoBehaviour
             part.materials = defaultMaterials;
         }
         attackable = true;
+    }
+
+    void KillEnemy() {
+        Rigidbody[] partBodies = GetComponentsInChildren<Rigidbody>();
+
+        foreach (Rigidbody partBody in partBodies) {
+            partBody.useGravity = true;
+            partBody.isKinematic = false;
+
+            //Vector3 forceVector = newVector3(Random.Range())
+
+
+            //partBody.AddForce();
+        }
     }
 }
