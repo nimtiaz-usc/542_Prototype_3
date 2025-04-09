@@ -52,7 +52,13 @@ public class PlayerController : MonoBehaviour
         float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
 
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") > 0 && currInput >= prevInput) {
+        if (isAttacking)
+        {
+            curSpeedX /= sprintFactor;
+            curSpeedY /= sprintFactor;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") > 0 && currInput >= prevInput && !isAttacking) {
             curSpeedX *= sprintFactor;
             curSpeedY *= sprintFactor;
             DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 5f).SetEase(Ease.OutElastic);

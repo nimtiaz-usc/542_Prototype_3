@@ -1,16 +1,25 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    [SerializeField] float health = 10f;
+    [SerializeField] float maxHealth = 10f;
+    private float health;
     [SerializeField] bool attackable = true;
     [SerializeField] float invulnerableTime = 1f;
     [SerializeField] float maxForce = 1f;
+    [SerializeField] float respawnTime = 1f;
+    [SerializeField] Transform respawnPos;
     [SerializeField] Material[] defaultMaterials;
     [SerializeField] Material[] attackMaterials;
-    
+
+    private void Start()
+    {
+        health = maxHealth;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -35,7 +44,6 @@ public class EnemyDamage : MonoBehaviour
                     {
                         Invoke("ResetAttackable", invulnerableTime);
                     }
-
                 }
             }
         }
@@ -57,10 +65,34 @@ public class EnemyDamage : MonoBehaviour
             partBody.useGravity = true;
             partBody.isKinematic = false;
 
-            //Vector3 forceVector = newVector3(Random.Range())
-
-
-            //partBody.AddForce();
+            Vector3 forceVector = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
+            partBody.AddForce(Vector3.forward * maxForce);
         }
+        Invoke("Respawn", respawnTime);
+    }
+
+    void Respawn()
+    {
+        ResetAttackable();
+
+        Transform[] partTransforms = GetComponentsInChildren<Transform>();
+        Rigidbody[] partBodies = GetComponentsInChildren<Rigidbody>();
+
+        foreach (Rigidbody partBody in partBodies)
+        {
+            partBody.useGravity = false;
+            partBody.isKinematic = true;
+        }
+
+        foreach (Transform partTransform in partTransforms)
+        {
+            partTransform.DOLocalMove(Vector3.zero, 0.5f);
+            partTransform.DOLocalRotate(Vector3.right * -90f, 0.5f);
+        }
+
+        transform.DOLocalMove(respawnPos.localPosition, 0.5f);
+        transform.DOLocalRotate(respawnPos.localRotation.eulerAngles, 0.5f);
+
+        health = maxHealth;
     }
 }
