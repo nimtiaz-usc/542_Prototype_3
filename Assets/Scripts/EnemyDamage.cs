@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
@@ -15,6 +16,8 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] Material[] defaultMaterials;
     [SerializeField] Material[] attackMaterials;
 
+    [SerializeField] PlayerController player;
+
     private void Start()
     {
         health = maxHealth;
@@ -24,7 +27,6 @@ public class EnemyDamage : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
             if (player != null)
             {
                 if (player.hitboxActive && attackable) {
@@ -39,7 +41,6 @@ public class EnemyDamage : MonoBehaviour
                     foreach(MeshRenderer partRenderer in partRenderers) {
                         partRenderer.materials = attackMaterials;
                     }
-
                     if (health <= 0)
                     {
                         KillEnemy();
@@ -66,11 +67,11 @@ public class EnemyDamage : MonoBehaviour
         Rigidbody[] partBodies = GetComponentsInChildren<Rigidbody>();
 
         foreach (Rigidbody partBody in partBodies) {
-            partBody.useGravity = true;
-            partBody.isKinematic = false;
-
-            Vector3 forceVector = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
-            partBody.AddForce(Vector3.forward * maxForce);
+            if (partBody != GetComponent<Rigidbody>()) {
+                partBody.useGravity = true;
+                partBody.isKinematic = false;
+                partBody.AddForce(player.transform.forward * maxForce, ForceMode.Impulse);
+            }
         }
         Invoke("Respawn", respawnTime);
     }
