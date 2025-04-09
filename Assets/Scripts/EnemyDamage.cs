@@ -28,6 +28,9 @@ public class EnemyDamage : MonoBehaviour
             if (player != null)
             {
                 if (player.hitboxActive && attackable) {
+
+                    player.impactParticles.transform.position = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                    player.impactParticles.GetComponent<ParticleSystem>().Play();
                     attackable = false;
                     health -= player.attackDamage;
                     Debug.Log("attacked: now at " + health + " HP!");
@@ -59,6 +62,7 @@ public class EnemyDamage : MonoBehaviour
     }
 
     void KillEnemy() {
+        GetComponent<Collider>().enabled = false;
         Rigidbody[] partBodies = GetComponentsInChildren<Rigidbody>();
 
         foreach (Rigidbody partBody in partBodies) {
@@ -92,6 +96,8 @@ public class EnemyDamage : MonoBehaviour
 
         transform.DOLocalMove(respawnPos.localPosition, 0.5f);
         transform.DOLocalRotate(respawnPos.localRotation.eulerAngles, 0.5f);
+
+        GetComponent<Collider>().enabled = true;
 
         health = maxHealth;
     }

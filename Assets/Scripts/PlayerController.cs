@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera cam;
 
     [SerializeField] Image speedLines;
+    public GameObject speedParticles;
+
+    public GameObject impactParticles;
+
 
     //[SerializeField] AudioSource footstepSFX;
 
@@ -62,10 +66,12 @@ public class PlayerController : MonoBehaviour
             curSpeedX *= sprintFactor;
             curSpeedY *= sprintFactor;
             DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 80f, 5f).SetEase(Ease.OutElastic);
-            speedLines.DOFade(0.35f, 2f).SetEase(Ease.OutElastic);
+            //speedLines.DOFade(0.35f, 2f).SetEase(Ease.OutElastic);
+            speedParticles.SetActive(true);
         } else {
             DOTween.To(()=> cam.fieldOfView, x=> cam.fieldOfView = x, 60f, 5f).SetEase(Ease.OutElastic);
-            speedLines.DOFade(0f, 2f).SetEase(Ease.OutElastic);
+            //speedLines.DOFade(0f, 2f).SetEase(Ease.OutElastic);
+            speedParticles.SetActive(false);
         }
 
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);

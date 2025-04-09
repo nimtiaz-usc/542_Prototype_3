@@ -14,6 +14,7 @@ public class AttackManager : MonoBehaviour
     [SerializeField] float chargeScale = 0.5f;
     [SerializeField] ParticleSystem[] particles;
     [SerializeField] Ease attackEase;
+    [SerializeField] GameObject trail;
 
     private bool charged = false;
 
@@ -27,6 +28,8 @@ public class AttackManager : MonoBehaviour
         {
             StartCoroutine(AttackCharge());
         }
+
+        if (player.hitboxActive) { trail.SetActive(true); } else { trail.SetActive(false); }
     }
 
     IEnumerator AttackSequence() {
