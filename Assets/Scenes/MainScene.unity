@@ -1271,9 +1271,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2191068e431454199c480fad34e730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   attackable: 1
-  invulnerableTime: 1
+  invulnerableTime: 0.25
+  defaultMaterials:
+  - {fileID: 2100000, guid: 55d0695fc6efaee42aaabeda5bd17c04, type: 2}
+  - {fileID: 2100000, guid: 8ab3dd4152d7b91478d49c52263aca58, type: 2}
+  attackMaterials:
+  - {fileID: 2100000, guid: 38edccabcdd7bc24ca6a060c8e70df9a, type: 2}
+  - {fileID: 2100000, guid: 229fe83e6151b2d4ea59555947ac7ab4, type: 2}
 --- !u!54 &820328113
 Rigidbody:
   m_ObjectHideFlags: 0

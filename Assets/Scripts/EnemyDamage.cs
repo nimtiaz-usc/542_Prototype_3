@@ -7,6 +7,8 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] float health = 10f;
     [SerializeField] bool attackable = true;
     [SerializeField] float invulnerableTime = 1f;
+    [SerializeField] Material[] defaultMaterials;
+    [SerializeField] Material[] attackMaterials;
 
     private void OnTriggerStay(Collider other)
     {
@@ -19,6 +21,11 @@ public class EnemyDamage : MonoBehaviour
                     attackable = false;
                     health -= player.attackDamage;
                     Debug.Log("attacked: now at " + health + " HP!");
+
+                    MeshRenderer[] parts = GetComponentsInChildren<MeshRenderer>();
+                    foreach(MeshRenderer part in parts) {
+                        part.materials = attackMaterials;
+                    }
 
                     if (health <= 0)
                     {
@@ -35,6 +42,10 @@ public class EnemyDamage : MonoBehaviour
 
     void ResetAttackable()
     {
+        MeshRenderer[] parts = GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer part in parts) {
+            part.materials = defaultMaterials;
+        }
         attackable = true;
     }
 }
