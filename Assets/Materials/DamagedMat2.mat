@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ArmMat_Shaded
+  m_Name: DamagedMat2
   m_Shader: {fileID: -6465566751694194690, guid: 1125da7d3f15e84429ece1776a45df60,
     type: 3}
   m_Parent: {fileID: 0}
@@ -58,5 +58,5 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0.8862745, g: 0.6627451, b: 0.42352942, a: 0}
+    - _Color: {r: 0.6754716, g: 0.032881305, b: 0, a: 0}
   m_BuildTextureStacks: []

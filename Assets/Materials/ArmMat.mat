@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RobotMat2_Shaded
+  m_Name: ArmMat
   m_Shader: {fileID: -6465566751694194690, guid: 1125da7d3f15e84429ece1776a45df60,
     type: 3}
   m_Parent: {fileID: 0}
@@ -58,5 +58,5 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0.6924528, g: 0.80542934, b: 1, a: 0}
+    - _Color: {r: 0.801, g: 0.60074997, b: 0.4005, a: 0}
   m_BuildTextureStacks: []

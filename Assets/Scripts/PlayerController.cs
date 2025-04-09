@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
     public bool isAttacking = false;
+    public bool hitboxActive = false;
+
+    public float attackDamage = 2f;
 
     CharacterController characterController;
     [SerializeField] Transform camPivot;

@@ -42,24 +42,27 @@ public class HorizontalTurn : MonoBehaviour
 
             if (currInput < 0 && currInput <= prevInput)
             {
-                leftTurn.Play();
+                transform.DOLocalMove(leftPos.localPosition, turnSpeed).SetEase(turnEase);
+                transform.DOLocalRotate(leftPos.localRotation.eulerAngles, turnSpeed).SetEase(turnEase);
             }
 
             if (currInput > 0 && currInput >= prevInput)
             {
-                rightTurn.Play();
+                transform.DOLocalMove(rightPos.localPosition, turnSpeed).SetEase(turnEase);
+                transform.DOLocalRotate(rightPos.localRotation.eulerAngles, turnSpeed).SetEase(turnEase);
             }
 
             if (currInput == 0 || (currInput < 0 && currInput > prevInput) || (currInput > 0 && currInput < prevInput))
             {
-                resetTurn.Play();
+                transform.DOLocalMove(Vector3.zero, turnSpeed).SetEase(turnEase);
+                transform.DOLocalRotate(Vector3.zero, turnSpeed).SetEase(turnEase);
             }
 
-            Debug.Log("-----------------------------------");
-            Debug.Log("left turn: " + leftTurn.IsPlaying());
-            Debug.Log("right turn: " + rightTurn.IsPlaying());
-            Debug.Log("reset turn: " + resetTurn.IsPlaying());
-            Debug.Log("-----------------------------------");
+            //Debug.Log("-----------------------------------");
+            //Debug.Log("left turn: " + leftTurn.IsPlaying());
+            //Debug.Log("right turn: " + rightTurn.IsPlaying());
+            //Debug.Log("reset turn: " + resetTurn.IsPlaying());
+            //Debug.Log("-----------------------------------");
 
             prevInput = currInput;
         } else {
